@@ -1,6 +1,6 @@
 # Transportable Causal Bootstrapping
 
-`tcb` is a transportable causal resampling technique based on causal transportability, which converts selection diagrams and revised sID output into transport formulas, inspectable transportable causal weight (TCW) expressions, numerical weights, and bootstrap samples. Its theoretical basis is the TCW derivation and TCB algorithm in `ch4.tex`. By default, it evaluates the full sum over pairs of observations.
+`tcb` is a transportable causal resampling technique based on causal transportability, which converts selection diagrams and revised sID output into transport formulas, inspectable transportable causal weight (TCW) expressions, numerical weights, and bootstrap samples. By default, it evaluates the full sum over pairs of observations.
 
 ## Installation and execution
 
@@ -152,3 +152,14 @@ See `docs/theory.md` for the mapping between equations and implementation, and `
 The wheel contains the Python library; use a source archive to access the Demo
 notebooks. See [the release guide](docs/releasing.md) for build and validation
 steps and the publication metadata still to be supplied.
+
+## Citation
+
+```bibtex
+@inproceedings{mao2026weighted,
+  title={A Weighted Resampling Framework for Causal Transportability},
+  author={Mao, Jianqiao and Little, Max},
+  booktitle={EUROPEAN CAUSAL INFERENCE MEETING 2026: Causal inference in health, economics, and social sciences},
+  year={2026}
+}
+```
