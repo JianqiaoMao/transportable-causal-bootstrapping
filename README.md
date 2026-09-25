@@ -138,18 +138,6 @@ result = transportable_bootstrap(
 
 For continuous `Y`, supply an explicit intervention grid, such as `[{'Y': y} for y in grid]`.
 
-## Migrating the three experiments
-
-`examples/experiment_adapters.py` provides functions that can replace the TCB stage of the existing experiments:
-
-* `classification_tcb(...)`: classification, with intervention sample counts matching the original label counts.
-* `bgmnist_tcb(...)`: the same computation, preserving image tensor dimensions.
-* `regression_tcb(...)`: a specified continuous intervention grid, KDE estimates of `P*(V)` and `P*(Z,V)`, and a user-supplied source function.
-
-These adapters do not read existing experiment results, train models, or modify the original experiment scripts. A complete runnable example is provided in `examples/quickstart.py`.
-
-The regression adapter uses `mode="more_do", simplify=True`. It first obtains `P_source(Z | do(Y,V))` from sID, then applies the graphical m-separation check for do-calculus Rule 2 to exchange `do(V)` for conditioning on `V`. It also removes `Y` from the target outcome's conditioning set when the graph establishes the required conditional independence. This yields the paper's weight expression, `P_source(Z | V,do(Y))*P*(V)/(N*P*(Z,V))`. These transformations are recorded in `transport_formula.provenance`.
-
 ## Supported formulas and sID output checks
 
 Automatic TCW derivation follows the conditions in Chapter 4: a unique target-domain outcome factor `P*(X | W_X)` must be extractable, and the remaining factors must not depend on the outcome. Formulas containing only a directly transported source outcome factor, multiple outcome dependencies, or nested ratios outside the supported representation raise `UnsupportedFormulaError`. This is distinct from `NotTransportableError`.
@@ -161,12 +149,6 @@ The library includes a snapshot of the supplied sID implementation and `LocalDOE
 * Use `analyze(formula=TransportFormula(...))` to supply a verified formula explicitly. This is treated as user-provided mathematical input, not as a formula identified by sID.
 
 See `docs/theory.md` for the mapping between equations and implementation, and `THIRD_PARTY.md` for provenance and reuse details.
-
-## Release artifacts
-
-The `dist/` directory contains the installable wheel, a standard source
-distribution (`.tar.gz`), and a convenience `-source.zip` containing the demos
-and supporting source files. `SHA256SUMS.txt` lists their checksums.
 The wheel contains the Python library; use a source archive to access the Demo
 notebooks. See [the release guide](docs/releasing.md) for build and validation
 steps and the publication metadata still to be supplied.
