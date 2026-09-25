@@ -140,18 +140,11 @@ For continuous `Y`, supply an explicit intervention grid, such as `[{'Y': y} for
 
 ## Supported formulas and sID output checks
 
-Automatic TCW derivation follows the conditions in Chapter 4: a unique target-domain outcome factor `P*(X | W_X)` must be extractable, and the remaining factors must not depend on the outcome. Formulas containing only a directly transported source outcome factor, multiple outcome dependencies, or nested ratios outside the supported representation raise `UnsupportedFormulaError`. This is distinct from `NotTransportableError`.
-
-The library includes a snapshot of the supplied sID implementation and `LocalDOExpr`, with only the helper import changed to a relative package import. It retains `standard` / `more_do` modes and the fallback warning. Automatic identification preserves that implementation's behavior; it does not constitute a new soundness proof or validation for every graph. In particular:
-
-* On the regression graph, the current standard sID output omits `V` from the source term. It must not silently be interpreted as the paper's conditional source distribution. Use the regression path described above.
-* Some `more_do` outputs may have inconsistent marginal-variable and per-term do metadata. Numerical computation is rejected when unbound variables remain.
-* Use `analyze(formula=TransportFormula(...))` to supply a verified formula explicitly. This is treated as user-provided mathematical input, not as a formula identified by sID.
+Automatic TCW derivation follows the conditions of that a unique target-domain outcome factor `P*(X | W_X)` must be extractable, and the remaining factors must not depend on the outcome. Formulas containing only a directly transported source outcome factor, multiple outcome dependencies, or nested ratios outside the supported representation raise `UnsupportedFormulaError`. This is distinct from `NotTransportableError`.
 
 See `docs/theory.md` for the mapping between equations and implementation, and `THIRD_PARTY.md` for provenance and reuse details.
 The wheel contains the Python library; use a source archive to access the Demo
-notebooks. See [the release guide](docs/releasing.md) for build and validation
-steps and the publication metadata still to be supplied.
+notebooks.
 
 ## Citation
 
